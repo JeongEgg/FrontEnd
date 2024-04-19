@@ -1,0 +1,450 @@
+/* 중복되어 사용될 수 있는 css 코드들을 여기에다 정의하고
+   다른 html에서도 적용할 수 있도록 한다.
+   새롭게 만드는 html 파일에서 필요없는 css들이 있을 수 있다.
+   또는 원하지 않는 css가 적용되어버리는 문제가 있을 수 있다. 
+   
+   중복되는 부분은 COMMON, HEADER, FOOTER 부분.
+   그 외의 css는 디폴트 경로의 index.html에만 적용된다.
+   
+   common.css를 각 html 파일에서 연결시켜준다. */
+
+/* COMMON */
+body {
+  color: #333333;
+  font-size: 16px;
+  font-weight: 400;/* 글자 두께 */
+  line-height: 1.4;/* 행간격 설정 */
+  font-family: "Nanum Gothic", sans-serif;  
+  /* height: 3000px; */
+  /* 스크롤바가 생김 */
+}
+img {
+  display: block;
+  /* 이미지 요소는 기본적으로 inline 요소.
+      inline 요소는 가로,세로 값을 가질 수 없고, margin과 padding의 값을 가질 수 없는
+      글자처럼 취급되는 요소. 글자처럼 취급되어 위아래 방향에 불규칙적인 공백이 생김.
+      그래서 inline 요소를 block 요소로 바꾸어주도록 적용함.
+  */
+}
+a {
+  text-decoration: none; /* 모든 a태그에 밑줄 제거*/
+}
+.inner {
+  width: 1100px;
+  margin: 0 auto;
+  position: relative;
+}
+.btn {
+  /* 버튼의 디자인이 반복적으로 사용되므로 전역적으로 클래스의 이름을 사용하여 정의함 */
+  width: 130px;
+  padding: 10px;
+  border: 2px solid #333;
+  border-radius: 4px;
+  color: #333;
+  font-size: 16px;
+  font-weight: 700;/* 글자 두께 */
+  text-align: center;/* 글자 정렬 */
+  cursor: pointer;
+  box-sizing: border-box;
+  /* border가 들어갈 때, 버튼 크기를 위에서 정의한 값으로 일정하게 유지도되록 함.*/
+  display: block;
+  transition: .4s;
+}
+.btn:hover {
+  background-color: #333;
+  color: #fff;
+}
+/* 일반적으로 html에서 클래스의 이름을 정의하고 html에 맞게 css를 정의하여 
+    디자인을 적용하도록 한다. 그러나 반대로 css 내용을 아래와 같이 추가한 상태에서
+    html에서 선택자에 맞게 클래스를 구현하여 디자인을 적용할 수도 있다. */
+.btn.btn--reverse {
+  /* 반전된 디자인의 버튼 */
+  background-color: #333;
+  color: #fff;
+}
+.btn.btn--reverse:hover {
+  background-color: transparent;
+  color: #333;
+}
+.btn.btn--brown {
+  /* hover 하였을 때, 글자색만 변하는 다른 스타일의 버튼 */
+  color: #592B18;
+  border-color: #592B18;
+}
+.btn.btn--brown:hover {
+  color: #fff;
+  background-color: #592B18;
+}
+.btn.btn--gold {
+  color: #D9AA8A;
+  border-color: #D9AA8A;
+}
+.btn.btn--gold:hover {
+  color: #fff;
+  border-color: #D9AA8A;
+}
+.btn.btn--white {
+  color: #fff;
+  border-color: #fff;
+}
+.btn.btn--white:hover {
+  color: #333;
+  background-color: #fff;
+}
+.back-to-position {
+  /* 애니메이션이 적용되기 전에 화면에 나타나지 않도록 설정 */
+  opacity: 0;
+  transition: 1s;
+}
+.back-to-position.to-right {
+  /* 왼쪽에서 오른쪽으로 나타나는 애니메이션 효과 적용 */
+  transform: translateX(-150px);
+  /* 화면에 있는 요소를 왼쪽으로 150px만큼 이동시켜 둠.
+      .show 클래스명이 붙으면 다시 돌아오게 되어서
+      왼쪽에서 오른쪽으로 150px만큼 이동하는 효과를 만듬. */
+}
+.back-to-position.to-left {
+  /* 오른쪽에서 왼쪽으로 나타나는 애니메이션 효과 적용 */
+  transform: translateX(150px);
+  /* 화면에 있는 요소를 오른쪽으로 150px만큼 이동시켜 둠.
+      .show 클래스명이 붙으면 다시 돌아오게 되어서
+      오른쪽에서 왼쪽으로 150px만큼 이동하는 효과를 만듬. */
+}
+.show .back-to-position {
+  opacity: 1;
+  transform: translateX(0);
+}
+.show .back-to-position.delay-0 {
+  transition-delay: 0s;
+}
+.show .back-to-position.delay-1 {
+  transition-delay: .3s;
+}
+.show .back-to-position.delay-2 {
+  transition-delay: .6s;
+}
+.show .back-to-position.delay-3 {
+  transition-delay: .9s;
+}
+
+/* HEADER */
+header {
+  background-color: #f6f5f0;
+  border-bottom: 1px solid #c8c8c8;
+  /* position: relative; */
+  /*badges 의 position 설정을 위한 부모 요소의 디폴트 position 설정 */
+
+  position: fixed;
+  top: 0;
+  /*브라우저의 뷰포트를 기준으로 위치시키는 설정
+    fixed를 사용한 경우 가로 너비를 최소한의 값으로 사용하도록 설정함. */
+  width: 100%; /* fixed로 변경한 경우 좌우 여백을 최대한으로 사용하도록 설정함 */
+  /* 위의 설정을 하면 스크롤을 내리더라도 header가 화면의 상단에 고정되어 나타남 */
+
+  z-index: 9;
+  /* section 부분과 header 부분의 쌓임순서에 대해 section 부분이 header의 
+      badges 이미지를 가림으로 header의 쌓임순서 값을 높임. 임의로 9라는 값을 주어
+      이후에 다른 요소들이 추가되어 쌓임순서 크기가 다양해질 경우를 고려함 */
+}
+header > .inner {
+  /* > : 자식선택자. 즉, 오직 header의 자식요소인 inner에 대해서만
+          아래의 css 설정을 적용함. */
+  /* position: relative; */
+  /* logo의 position 설정에 대한 상위 요소의 position 설정 */
+  /* width: 1100px; */
+  height: 120px;
+  /* margin: 0 auto;*/ /*0:위,아래, auto: 좌우 */
+  /* inner 클래스가 메뉴의 contents 부분과 중복되므로
+      위에서 전역적으로 inner 클래스에 대해 설정하고, 중복되는 부분은 제거함. 
+      여기서 inner에 대한 설정은 오직 header 내에 있는 inner에 대한 설정임 */
+}
+header .logo {
+  height: 75px;
+  /* 아래는 로고 이미지를 상위 요소 내에서 수직 가운데 위치하도록 하기 위한 설정.*/
+  position: absolute;
+  /* 배치 기준을 상위 요소에 찾음. DOM 트리를 따라 올라가다가 position 속성이 
+      static이 아닌 첫번째 상위 요소가 해당 요소의 배치 기준으로 설정됨.
+      여기서 첫번째 상위요소는 .inner가 된다. */
+  top: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  /* 부모요소를 기준으로 수직 정가운데 위치하도록 설정. 
+      top 0 지점과 bottom 0 지점을 기준으로 브라우저가 자동으로 margin값을 계산하여(auto)
+      요소를 위치시킨다.
+      요소의 위쪽여백, 아래쪽 여백을 계산하기 위해 요소의 높이값(height)도 설정해주어야 함.
+  */
+  /* .logo 하위의 img 요소에 대한 설정은 위에 있음. */
+}
+header .sub-menu {
+  display: flex;
+  /* 하위 요소인 ul 태그의 요소와 search 부분의 div 요소를 수평으로 배치 */
+
+  position: absolute;
+  top: 10px;
+  right: 0;
+  /* sub-menu 요소의 전체적인 위치 설정. 오른쪽 위의 위치로 설정함 */
+}
+header .sub-menu ul.menu {
+  font-family: Arial, sans-serif; /* 글꼴 설정 */
+  display: flex; /* 하위의 요소들을 수평으로 정렬함.*/
+}
+header .sub-menu ul.menu li {
+  position: relative;
+}
+header .sub-menu ul.menu li::before{
+  /* before : 가상 요소 선택자. li 요소 앞 부분에 무언가를 설정하겠다는 의미
+      a 태그 사이의 수직바(구분선) 만들기 */
+  content: "";
+  width: 1px;
+  height: 12px;
+  background-color: #e5e5e5;
+
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  /* 구분선의 위치 설정 */
+}
+header .sub-menu ul.menu li:first-child:before{
+  /* first-child : 가상 요소 선택자 중에서 첫번째 요소에 대한 설정 
+      화면에서 Sign In 태그 앞에 나타나는 구분선을 제거하도록 설정 */
+  display: none;
+}
+header .sub-menu ul.menu li a {
+  font-size: 12px;
+  padding: 11px 16px;
+  display: block;
+  /* a 태그는 inline 요소이고, inline 요소는 margin, padding 값을
+      제대로 사용할 수 없다. a가 inline 요소일 때, 글자 크기를 설정하면,
+      글자 부분 이외의 부분을 클릭할 때, 원하는 결과대로 페이지 이동이 잘 안될 수 있다.
+      여기서 padding을 설정하고, padding이 적용가능하도록 하기 위해,
+      해당 요소를 block으로 설정한다. */
+  color: #656565;
+}
+header .sub-menu ul.menu li a:hover{
+  /* hover : a 태그에 마우스를 올렸을 때에 대한 처리 */
+  color: #000;
+}
+header .sub-menu .search {
+  height: 34px;
+  position: relative;
+  /* 하위 요소 .material-icons에 position을 적용하기 위한 부모요소에서의
+      position 설정. */
+}
+header .sub-menu .search input {
+  width: 36px;
+  height: 34px;
+  padding: 4px 10px; /* 앞의 4px는 위아래, 뒤의 10px는 좌우의 padding 설정 */
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  /* 요소의 크기 기준을 위에서 설정한 가로 36px, 세로 34px를 유지하면서
+      내부 여백과 테두리선(border)이 추가되도록 설정함.
+      
+      디폴트 값은 'content'. 이 설정의 상태에서 border나 padding이 추가되면
+      요소의 너비ㅏ 높이에 추가가 되어 해당 box의 크기는 그만큼 더 커지게 된다.
+      'border-box'에 border나 padding을 추가하면 해당 box의 크기는 그만큼
+      더 커지지 않고 사용자가 지정한 너비나 높이만큼 길이에 맞추게 된다. */
+  border-radius: 5px;/* 현재의 input 요소의 모서리 라운드 설정 */
+  outline: none;
+  /* input 요소의 가장자리에 나타나는 파란색 테두리선.
+      제어하기가 쉽지 않기 때문에 outline을 사용하지 않도록 설정. */
+  background-color: #fff;
+  color: #777;/* 글자색 설정*/
+  font-size: 12px;
+  transition: width .4s;
+  /* 아래의 focus 설정을 통해 요소가 변할 때, 시간을 설정하여
+      자연스럽게 변하도록 함.*/
+}
+header .sub-menu .search input:focus {
+  /* focus : 해당하는 input 요소에 초점이 맞추어졌을 때에 대한 설정 */
+  width: 190px;
+  border-color: #669900;
+}
+header .sub-menu .search .material-icons {
+  position: absolute;
+  height: 24px; /* 해당 요소의 여백 설정에 사용되는 height 설정 */
+  top: 0;
+  bottom: 0;
+  right: 5px;
+  margin: auto;
+  /* search icon을 클릭하였을 떄는 focus의 효과가 나타나지 않으며,
+      이에 대한 설정은 css에서 제어할 수 있는 영역을 벗어나기 때문에
+      자바스크립트에서 설정해주어야 한다. */
+  transition: .4s;
+  /* 돋보기 아이콘이 자연스럽게 사라지도록 하기 위한 시간 설정 */
+}
+header .sub-menu .search.focused .material-icons {
+  /* search 부분이 focus 되었을 때에 대한 설정 */
+  opacity: 0; /* focus 되었을 때, 아이콘을 숨김 */
+}
+header .main-menu {
+  display: flex;/* 하위의 li 요소를 수평으로 배치 */
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  /* 메뉴 전체를 부모요소를 기준으로 정할 수 있도록 설정
+      부모요소에서 오른쪽 아래에 위치하도록 함 */
+  z-index: 1;
+  /* 마우스가 올려져서 목록이 나타날 때, 요소가 다른 요소들보다 위에 나타나도록 설정 */
+}
+header .main-menu .item {
+
+}
+header .main-menu .item .item__name {
+  padding: 10px 20px 34px 20px;
+  font-family: Arial, sans-serif;
+  font-size: 13px;
+}
+header .main-menu .item:hover .item__name {
+  /* hover : 글자 부분만이 아닌 item 전체에 대해 
+    마우스가 올라갔을 때 적용되도록 함*/
+  background-color: #2c2a29;
+  color: #669900;/* 글자색 변경 */
+  border-radius: 6px 6px 0 0;/* 순서 : 좌상 우상 우하 좌하 */
+}
+header .main-menu .item .item__contents {
+  width: 100%;
+  position: fixed;/* viewport를 기준으로 배치한다 */
+  left: 0;
+  /* top이나 bottom 속성을 사용하지 않아 수직 위치 값이 없다면
+      요소의 원래 위치를 그대로 사용한다.
+      만약 position: absolute;를 사용했다면, (위치상) 부모 요소를 기준으로 하므로
+      화면의 뷰포트 좌우 끝까지 늘어날 수 없게 된다. */
+  display: none;
+}
+header .main-menu .item:hover .item__contents {
+  display: block;
+}
+header .main-menu .item .item__contents .contents__menu {
+  background-color: #2c2a29;
+}
+header .main-menu .item .item__contents .contents__menu > ul {
+  /* > : 자식선택자 사용. contents__menu 하위에 ul 태그가 2번 나타나기
+      떄문에 바로 아래의 자식요소에 대해서만 css를 적용하도록 설정함. */
+  display: flex;
+  padding: 20px 0;
+}
+header .main-menu .item .item__contents .contents__menu > ul > li {
+  width: 220px;/*header의 수평방향으로 나타나는 리스트 너비 설정 */
+}
+header .main-menu .item .item__contents .contents__menu > ul > li h4 {
+  padding: 3px 0 12px 0;/* 위,우,아래,좌 순서로 설정 */
+  font-size: 14px;
+  color: #fff;
+}
+header .main-menu .item .item__contents .contents__menu > ul > li ul li {
+  padding: 5px 0;
+  font-size: 12px;
+  color: #999;
+  cursor: pointer;
+}
+header .main-menu .item .item__contents .contents__menu > ul > li ul li:hover {
+  color: #669900;/* 리스트 위에 마우스가 올려졌을 때 글자색 변경 */
+}
+header .main-menu .item .item__contents .contents__texture {
+  padding: 20px 0;
+  font-size: 12px; /* h4, p 2개의 태그에 대해 동일한 글자 크기 설정을 함 */
+  background-image: url("../images/main_menu_pattern.jpg");
+  /* 배경을 이미지로 설정함. 이미지가 반복되는 패턴으로 나옴 */
+}
+header .main-menu .item .item__contents .contents__texture h4 {
+  color: #999;
+  font-weight: 700;
+}
+header .main-menu .item .item__contents .contents__texture p {
+  color: #669900;
+  margin: 4px 0 14px;
+}
+header .badges {
+  position: absolute;
+  top: 132px;
+  right: 12px;
+}
+header .badges .badge {
+  border-radius: 10px;
+  overflow: hidden;
+  /* 이미지에 라운드를 줄 때, 내부의 이미지가 그 경계를 넘어서지 않도록 설정*/
+  margin-bottom: 12px;
+  box-shadow: 4px 4px 10px rgba(0,0,0,.15);/*그림자 효과*/
+  cursor: pointer;/*커서가 요소 위에 있을 때, 모양이 변함 */
+}
+
+
+/* FOOTER */
+footer {
+  background-color: #272727;
+  border-top: 1px solid #333;
+}
+footer .inner {
+  padding: 40px 0 60px 0;
+}
+footer .menu {
+  display: flex; /* 수평으로 나열하도록 함 */
+  justify-content: center;
+}
+footer .menu li {
+  position: relative;
+}
+footer .menu li::before {
+  content: "";
+  width: 3px;
+  height: 3px;
+  background-color: #555;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: -1px;
+  margin: auto;
+}
+footer .menu li:last-child::before {
+  display: none;
+}
+footer .menu li a {
+  color: #ccc;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 15px;
+
+  display: block;
+  /* 사용자가 a 요소를 클릭할 수 있는 범위를 늘려줌. */
+}
+footer .menu li a.green {
+  color: #669900;
+}
+footer .btn-group {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+footer .btn-group .btn {
+  font-size: 12px;
+  margin-right: 10px;
+}
+footer .btn-group .btn .btn:last-child {
+  margin-right: 0;
+}
+footer .info {
+  margin-top: 30px;
+  text-align: center;
+}
+footer .info span {
+  margin-right: 20px;
+  color: #999;
+  font-size: 12px;
+}
+footer .info span:last-child {
+  margin-right: 0;
+}
+footer .copyright {
+  color: #999;
+  font-size: 12px;
+  text-align: center;
+  margin-top: 12px;
+}
+footer .logo {
+  margin: 30px auto 0;
+  /* img 요소가 display: block; + margin: 0 auto; 인 경우,
+     width 속성이 없이도 가운데 정렬이 가능하다.
+     가장 위의 common 부분에서 img 요소에 display: block;을 지정하였다. */
+}

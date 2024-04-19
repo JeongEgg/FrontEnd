@@ -1,20 +1,26 @@
-const searchEl = document.querySelector('.search');
-const searchInputEl = searchEl.querySelector('input');
 
-searchEl.addEventListener('click', function () {
-  searchInputEl.focus();    
-});
-searchInputEl.addEventListener('focus', function () {
-  searchEl.classList.add('focused');
-  searchInputEl.setAttribute('placeholder','통합검색');
-  /* html 속성 지정 
-     placeholder : input 요소에 추가할 수 있는 속성 */
-});
-searchInputEl.addEventListener('blur', function () {
-  /* blur : 해당요소의 focus가 해제되었을 때를 의미 */
-  searchEl.classList.remove('focused');
-  searchInputEl.setAttribute('placeholder','');
-});
+/* 디폴트 경로의 index.html과 signin 경로의 index.html 파일에서
+   중복으로 사용되는 js 소스코드들을 common.js로 이동하고, 각 html에서
+   common.js를 연결시킨다. */
+
+   
+// const searchEl = document.querySelector('.search');
+// const searchInputEl = searchEl.querySelector('input');
+
+// searchEl.addEventListener('click', function () {
+//   searchInputEl.focus();    
+// });
+// searchInputEl.addEventListener('focus', function () {
+//   searchEl.classList.add('focused');
+//   searchInputEl.setAttribute('placeholder','통합검색');
+//   /* html 속성 지정 
+//      placeholder : input 요소에 추가할 수 있는 속성 */
+// });
+// searchInputEl.addEventListener('blur', function () {
+//   /* blur : 해당요소의 focus가 해제되었을 때를 의미 */
+//   searchEl.classList.remove('focused');
+//   searchInputEl.setAttribute('placeholder','');
+// });
 
 
 /** 스크롤 할 때, badge를 올라가도록 함 */
@@ -219,6 +225,7 @@ spyEls.forEach(function (spyEl) {
    이제 css에서 .show라는 클래스명이 있는 경우와 없는 경우에 대해 애니메이션 효과를 적용할 수 있음
 */
 
-// html footer의 this-year 클래스의 요소 앞에 현재 년도를 넣어줌.
-const thisYear = document.querySelector('.this-year');
-thisYear.textContent = new Date().getFullYear(); // 2024
+
+// // html footer의 this-year 클래스의 요소 앞에 현재 년도를 넣어줌.
+// const thisYear = document.querySelector('.this-year');
+// thisYear.textContent = new Date().getFullYear(); // 2024
