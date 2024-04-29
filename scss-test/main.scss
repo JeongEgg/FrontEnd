@@ -1,0 +1,340 @@
+.container {
+  h1 {
+    color: red;
+  }
+}
+
+
+// 중첩된 속성
+.fs {
+  &-small { font-size: 12px; }
+  &-medium { font-size: 14px; }
+  &-large { font-size: 16px; }
+}
+/*
+  .fs-small {
+    font-size: 12px;
+  }
+  .fs-medium {
+    font-size: 14px;
+  }
+  .fs-large {
+    font-size: 16px;
+  }
+*/
+
+
+// 변수
+
+.container {
+  $size: 200px;
+  position: fixed;
+  top: $size;
+  .item {
+    $size: 100px;
+    width: $size;
+    height: $size;
+    transform: translateX($size);
+  }
+  left: $size;
+}
+/*
+  .container {
+    position: fixed;
+    top: 200px;
+    left: 100px;
+  }
+  .container .item {
+    width: 100px;
+    height: 100px;
+    transform: translateX(100px);
+  }
+*/
+
+// 산술연산
+
+div {
+  $size: 30px;
+  width: 20px + 20px;
+  height: 40px -10px;
+  font-size: 10px * 2;
+  // margin: (30px / 2);
+  margin: $size / 2;
+  padding: 20px % 7;
+}
+span {
+  font-size: 10px;
+  line-height: 10px;
+  font: 10px / 10px serif;
+}
+div {
+  width: 100% - 200px;
+}
+/*
+  div {
+    width: 40px;
+    height: 40px -10px;
+    font-size: 20px;
+    margin: 15px;
+    padding: 6px;
+  }
+  span {
+    font-size: 10px;
+    line-height: 10px;
+    font: 10px/10px serif;
+  }
+*/
+
+// 재활용
+
+@mixin center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.container {
+  @include center;
+  .item {
+    @include center;
+  }
+}
+.box {
+  @include center;
+}
+/*
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .container .item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+*/
+
+@mixin box($size: 80px, $color: tomato) {
+  width: $size;
+  height: $size;
+  background-color: $color;
+}
+.container {
+  @include box(200px, red);
+  .item {
+    @include box($color: green);
+  }
+}
+.box {
+  @include box;
+}
+/*
+  .container {
+    width: 200px;
+    height: 200px;
+    background-color: red;
+  }
+  .container .item {
+    width: 80px;
+    height: 80px;
+    background-color: green;
+  }
+
+  .box {
+    width: 80px;
+    height: 80px;
+    background-color: tomato;
+  }
+*/
+
+// 반복문
+@for $i from 1 through 10 {
+  .box:nth-child(#{$i}) {
+    width: 100px * $i;
+  }  
+}
+
+/*
+  .box:nth-child(1) {
+    width: 100px;
+  }
+  .box:nth-child(2) {
+    width: 200px;
+  }
+  .box:nth-child(3) {
+    width: 300px;
+  }
+  .box:nth-child(4) {
+    width: 400px;
+  }
+  .box:nth-child(5) {
+    width: 500px;
+  }
+  .box:nth-child(6) {
+    width: 600px;
+  }
+  .box:nth-child(7) {
+    width: 700px;
+  }
+  .box:nth-child(8) {
+    width: 800px;
+  }
+  .box:nth-child(9) {
+    width: 900px;
+  }
+  .box:nth-child(10) {
+    width: 1000px;
+  }
+*/
+
+// 함수
+@mixin center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+@function ratio($size, $ratio) {
+  @return $size * $ratio
+}
+.box {
+  $width: 160px;
+  width: $width;
+  height: ratio($width, 1/2);
+  @include center;
+}
+/*
+  .box {
+    width: 100px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+*/
+
+// 색상 내장 함수
+.box {
+  $color: royalblue;
+  width: 200px;
+  height: 100px;
+  margin: 20px;
+  border-radius: 10px;
+  background-color: $color;
+  &:hover {
+    background-color: darken($color, 10%);
+  }
+  &.built-in {
+    // background-color: lighten($color, 10%);
+    // background-color: saturate($color, 10%);
+    // background-color: desaturate($color, 10%);
+    // background-color: grayscale($color);
+    background-color: invert($color);
+    background-color: rgba($color, .5);
+  }
+}
+
+// 가져오기
+@import "./sub", "/sub2";
+
+
+// 데이터 종류
+$number: 1;
+$string: bold;
+$color: red;
+$boolean: true;
+$null: null;
+$list: orange, royalblue, yellow;
+$map: (
+  o: orange,
+  r: royalblue, 
+  y: yellow
+);
+.box {
+  width: 100px;
+  color: red;
+  position: relative;
+}
+// 반복문 @each
+@each $c in $list {
+  .box {
+    color: $c;
+  }
+}
+@each $k, $v in $map {
+  .box-#{$k} {
+    color: $c;
+  }
+}
+/*
+  .box {
+    width: 100px;
+    color: red;
+    position: relative;
+  }
+  .box {
+    color: orange;
+  }
+  .box {
+    color: royalblue;
+  }
+  .box {
+    color: yellow;
+  }
+  .box-o {
+    color: orange;
+  }
+  .box-r {
+    color: royalblue;
+  }
+  .box-y {
+    color: yellow;
+  }
+*/
+
+// 반복문 @content
+@mixin left-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  @content;
+}
+.container {
+  width: 100px;
+  height: 100px;
+  @include left-top;
+}
+.box {
+  width: 200px;
+  height: 300px;
+  @include left-top {
+    bottom: 0;
+    right: 0;
+    margin: auto;
+  }
+}
+
+/*
+  .container {
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  .box {
+    width: 200px;
+    height: 300px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+  }
+*/

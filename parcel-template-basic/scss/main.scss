@@ -1,0 +1,11 @@
+$color--black: #000;
+$color--white: #fff;
+
+body {
+  background-color: $color--black;
+  h1 {
+    color: $color--white;
+    display: flex;
+    // 공급 업체 접두사(-webkit, -ms)가 붙어서 적용이 안되어있는것을 브라우저 '검사'에서 확인할 수 있다.
+  }
+}

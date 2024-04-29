@@ -1,0 +1,28 @@
+// 커스터마이즈(사용자 지정)
+// https://getbootstrap.kr/docs/5.3/customize/sass/
+
+// Required
+@import "../node_modules/bootstrap/scss/functions";
+@import "../node_modules/bootstrap/scss/variables";
+@import "../node_modules/bootstrap/scss/mixins";
+
+
+// 사용자 지정(색상)
+// https://getbootstrap.kr/docs/5.3/customize/color/
+$theme-colors: (
+  "primary":    $primary,
+  "secondary":  yellowgreen,
+  "success":    $success,
+  "info":       $info,
+  "warning":    $warning,
+  "danger":     $danger,
+  "light":      $light,
+  "dark":       $dark
+);
+
+
+// 라이브러리의 scss를 연결함.
+@import "../node_modules/bootstrap/scss/bootstrap.scss"
+
+// 특정한 스타일만 가져와서 적용.
+// @import "../node_modules/bootstrap/scss/bootstrap.scss"
